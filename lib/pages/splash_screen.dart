@@ -1,4 +1,5 @@
 import 'package:animate_do/animate_do.dart';
+import 'package:finstein_app/contants/app_color.dart';
 import 'package:finstein_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,10 +36,19 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final double imageSize = MediaQuery.of(context).size.width * 0.3;
     return Container(
       alignment: Alignment.center,
-      color: const Color(0xFF0B56A9),
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            AppColor.lightBlue,
+            AppColor.mediumBlue,
+            AppColor.darkBlue,
+          ],
+        ),
+      ),
       child: ZoomIn(
         duration: const Duration(seconds: 5),
         child: Spin(
@@ -46,8 +56,8 @@ class _SplashScreenState extends State<SplashScreen>
             delay: Duration(seconds: 2),
             child: Image.asset(
               'assets/images/finstein_gmbh_logo-removebg.png',
-              width: imageSize,
-              height: imageSize,
+              width: 120,
+              height: 120,
             ),
           ),
         ),
