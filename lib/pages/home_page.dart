@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:finstein_app/contants/app_color.dart';
-import 'package:finstein_app/pages/login_page.dart';
+import 'package:finstein_app/pages/sign_in_page.dart';
+import 'package:finstein_app/pages/sign_up._page.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -81,7 +82,7 @@ class _WelcomePageState extends State<WelcomePage> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => LoginPage(),
+                              builder: (_) => SignInPage(),
                             ),
                           );
                         },
@@ -103,7 +104,14 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const SignUpPage(),
+                            ),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           minimumSize: const Size(double.infinity, 42),
                           backgroundColor: AppColor.mediumBlue,
