@@ -1,5 +1,6 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:finstein_app/contants/app_color.dart';
+import 'package:finstein_app/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -35,6 +36,8 @@ class _WelcomePageState extends State<WelcomePage> {
             Expanded(
               flex: 2,
               child: SlideInUp(
+                delay: const Duration(milliseconds: 500),
+                duration: const Duration(seconds: 1),
                 child: Image.asset(
                   'assets/images/finstein_gmbh_logo-removebg.png',
                 ),
@@ -43,6 +46,8 @@ class _WelcomePageState extends State<WelcomePage> {
             Expanded(
               flex: 1,
               child: SlideInUp(
+                delay: const Duration(milliseconds: 500),
+                duration: const Duration(seconds: 1),
                 child: Container(
                   padding: const EdgeInsets.all(24.0),
                   width: double.infinity,
@@ -72,7 +77,14 @@ class _WelcomePageState extends State<WelcomePage> {
                       ),
                       const SizedBox(height: 24),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => LoginPage(),
+                            ),
+                          );
+                        },
                         style: TextButton.styleFrom(
                           minimumSize: const Size(double.infinity, 42),
                           backgroundColor: Colors.white,
