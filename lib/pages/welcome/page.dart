@@ -1,8 +1,11 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:finstein_app/contants/app_color.dart';
-import 'package:finstein_app/pages/sign_in_page.dart';
-import 'package:finstein_app/pages/sign_up._page.dart';
+import 'package:finstein_app/constants/app_color.dart';
+import 'package:finstein_app/constants/app_image.dart';
+import 'package:finstein_app/pages/sign-in/page.dart';
+import 'package:finstein_app/pages/sign-up/page.dart';
+import 'package:finstein_app/widgets/basic_button.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -40,7 +43,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 delay: const Duration(milliseconds: 500),
                 duration: const Duration(seconds: 1),
                 child: Image.asset(
-                  'assets/images/finstein_gmbh_logo-removebg.png',
+                  AppImage.finsteinLogo,
                 ),
               ),
             ),
@@ -77,55 +80,15 @@ class _WelcomePageState extends State<WelcomePage> {
                         ),
                       ),
                       const SizedBox(height: 24),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => SignInPage(),
-                            ),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 42),
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: AppColor.mediumBlue,
-                            ),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: const Text(
-                          'Sign In',
-                          style: TextStyle(
-                            color: AppColor.mediumBlue,
-                          ),
-                        ),
+                      BasicButton(
+                        onPressed: _navigateToSignInPage,
+                        title: 'Sign In',
+                        isOutline: true,
                       ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const SignUpPage(),
-                            ),
-                          );
-                        },
-                        style: TextButton.styleFrom(
-                          minimumSize: const Size(double.infinity, 42),
-                          backgroundColor: AppColor.mediumBlue,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                        ),
-                        child: const Text(
-                          'Sign Up',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                      BasicButton(
+                        onPressed: _navigateToSignUpPage,
+                        title: 'Sign Up',
+                      )
                     ],
                   ),
                 ),
@@ -133,6 +96,28 @@ class _WelcomePageState extends State<WelcomePage> {
             )
           ],
         ),
+      ),
+    );
+  }
+
+  void _navigateToSignInPage() {
+    Navigator.push(
+      context,
+      PageTransition(
+        child: const SignInPage(),
+        type: PageTransitionType.rightToLeftWithFade,
+        duration: const Duration(seconds: 1),
+      ),
+    );
+  }
+
+  void _navigateToSignUpPage() {
+    Navigator.push(
+      context,
+      PageTransition(
+        child: const SignUpPage(),
+        type: PageTransitionType.rightToLeftWithFade,
+        duration: const Duration(seconds: 1),
       ),
     );
   }

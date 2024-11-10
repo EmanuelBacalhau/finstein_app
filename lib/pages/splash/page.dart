@@ -1,17 +1,19 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:finstein_app/contants/app_color.dart';
-import 'package:finstein_app/pages/home_page.dart';
+import 'package:finstein_app/constants/app_color.dart';
+import 'package:finstein_app/constants/app_image.dart';
+import 'package:finstein_app/pages/welcome/page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:page_transition/page_transition.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _SplashScreenState extends State<SplashScreen>
+class _SplashPageState extends State<SplashPage>
     with SingleTickerProviderStateMixin {
   @override
   void initState() {
@@ -27,9 +29,13 @@ class _SplashScreenState extends State<SplashScreen>
   void _navigateToHomePage() {
     Future.delayed(
       const Duration(seconds: 5),
-      () => Navigator.pushReplacement(
+      () => Navigator.push(
         context,
-        MaterialPageRoute(builder: (_) => const WelcomePage()),
+        PageTransition(
+          child: const WelcomePage(),
+          type: PageTransitionType.bottomToTop,
+          duration: const Duration(seconds: 1),
+        ),
       ),
     );
   }
@@ -55,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen>
           child: Bounce(
             delay: Duration(seconds: 2),
             child: Image.asset(
-              'assets/images/finstein_gmbh_logo-removebg.png',
+              AppImage.finsteinLogo,
               width: 120,
               height: 120,
             ),

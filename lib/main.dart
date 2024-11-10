@@ -1,4 +1,5 @@
-import 'package:finstein_app/pages/splash_screen.dart';
+import 'package:finstein_app/constants/app_theme.dart';
+import 'package:finstein_app/pages/splash/page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,9 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: const SplashPage(),
+      theme: AppTheme.theme,
     );
   }
 }

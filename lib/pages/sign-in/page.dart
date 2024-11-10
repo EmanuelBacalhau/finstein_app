@@ -1,8 +1,12 @@
 import 'package:animate_do/animate_do.dart';
-import 'package:finstein_app/pages/home_page.dart';
-import 'package:finstein_app/pages/sign_up._page.dart';
+import 'package:finstein_app/constants/app_image.dart';
+import 'package:finstein_app/pages/sign-up/page.dart';
+import 'package:finstein_app/pages/welcome/page.dart';
+import 'package:finstein_app/widgets/basic_button.dart';
+import 'package:finstein_app/widgets/basic_input.dart';
 import 'package:flutter/material.dart';
-import 'package:finstein_app/contants/app_color.dart';
+import 'package:finstein_app/constants/app_color.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -37,8 +41,7 @@ class _SignInPageState extends State<SignInPage> {
             SlideInUp(
               delay: const Duration(milliseconds: 500),
               duration: const Duration(seconds: 1),
-              child:
-                  Image.asset('assets/images/finstein_gmbh_logo-removebg.png'),
+              child: Image.asset(AppImage.finsteinLogo),
             ),
             Expanded(
               child: SlideInUp(
@@ -57,7 +60,7 @@ class _SignInPageState extends State<SignInPage> {
                   child: SingleChildScrollView(
                     child: SlideInUp(
                       delay: const Duration(milliseconds: 500),
-                      duration: Duration(seconds: 2),
+                      duration: const Duration(seconds: 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -74,7 +77,8 @@ class _SignInPageState extends State<SignInPage> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  TextFormField(
+                                  BasicInput(
+                                    labelText: 'Email',
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
                                         return 'Email is required';
@@ -82,27 +86,10 @@ class _SignInPageState extends State<SignInPage> {
                                       return null;
                                     },
                                     keyboardType: TextInputType.emailAddress,
-                                    decoration: InputDecoration(
-                                      labelText: 'Email',
-                                      labelStyle: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.grey.shade800,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade600,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade600,
-                                        ),
-                                      ),
-                                    ),
                                   ),
                                   const SizedBox(height: 8),
-                                  TextFormField(
+                                  BasicInput(
+                                    labelText: 'Password',
                                     keyboardType: TextInputType.text,
                                     validator: (value) {
                                       if (value == null || value.isEmpty) {
@@ -111,51 +98,11 @@ class _SignInPageState extends State<SignInPage> {
                                       return null;
                                     },
                                     obscureText: true,
-                                    decoration: InputDecoration(
-                                      labelText: 'Password',
-                                      labelStyle: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.grey.shade800,
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade600,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.grey.shade600,
-                                        ),
-                                      ),
-                                    ),
                                   ),
                                   const SizedBox(height: 16),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      if (_formKey.currentState!.validate()) {
-                                        Navigator.pushReplacement(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (_) => const WelcomePage(),
-                                          ),
-                                        );
-                                      }
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      minimumSize:
-                                          const Size(double.infinity, 42),
-                                      backgroundColor: AppColor.lightBlue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                    ),
-                                    child: const Text(
-                                      'Sign In',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                  BasicButton(
+                                    onPressed: _handleSubmit,
+                                    title: 'Sign In',
                                   ),
                                 ],
                               ),
@@ -163,14 +110,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           const SizedBox(height: 8),
                           TextButton(
-                            onPressed: () {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const SignUpPage(),
-                                ),
-                              );
-                            },
+                            onPressed: _redirectToSignUp,
                             style: TextButton.styleFrom(
                               minimumSize: const Size(double.infinity, 42),
                               backgroundColor: Colors.white,
@@ -205,5 +145,33 @@ class _SignInPageState extends State<SignInPage> {
         ),
       ),
     );
+  }
+
+  void _redirectToWelcome() {
+    Navigator.push(
+      context,
+      PageTransition(
+        child: const WelcomePage(),
+        type: PageTransitionType.rightToLeftWithFade,
+        duration: const Duration(seconds: 1),
+      ),
+    );
+  }
+
+  void _redirectToSignUp() {
+    Navigator.push(
+      context,
+      PageTransition(
+        child: const SignUpPage(),
+        type: PageTransitionType.rightToLeftWithFade,
+        duration: const Duration(seconds: 1),
+      ),
+    );
+  }
+
+  void _handleSubmit() {
+    if (_formKey.currentState!.validate()) {
+      _redirectToWelcome();
+    }
   }
 }
