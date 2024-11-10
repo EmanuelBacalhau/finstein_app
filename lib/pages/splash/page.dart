@@ -29,13 +29,14 @@ class _SplashPageState extends State<SplashPage>
   void _navigateToHomePage() {
     Future.delayed(
       const Duration(seconds: 5),
-      () => Navigator.push(
+      () => Navigator.pushAndRemoveUntil(
         context,
         PageTransition(
           child: const WelcomePage(),
           type: PageTransitionType.bottomToTop,
           duration: const Duration(seconds: 1),
         ),
+        (route) => false,
       ),
     );
   }

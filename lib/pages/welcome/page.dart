@@ -106,7 +106,7 @@ class _WelcomePageState extends State<WelcomePage> {
       PageTransition(
         child: const SignInPage(),
         type: PageTransitionType.rightToLeftWithFade,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 800),
       ),
     );
   }
@@ -117,7 +117,7 @@ class _WelcomePageState extends State<WelcomePage> {
       PageTransition(
         child: const SignUpPage(),
         type: PageTransitionType.rightToLeftWithFade,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 800),
       ),
     );
   }

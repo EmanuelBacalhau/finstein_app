@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:finstein_app/constants/app_image.dart';
+import 'package:finstein_app/pages/home/page.dart';
 import 'package:finstein_app/pages/sign-up/page.dart';
-import 'package:finstein_app/pages/welcome/page.dart';
 import 'package:finstein_app/widgets/basic_button.dart';
 import 'package:finstein_app/widgets/basic_input.dart';
 import 'package:flutter/material.dart';
@@ -39,17 +39,12 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           children: [
             SlideInUp(
-              delay: const Duration(milliseconds: 500),
-              duration: const Duration(seconds: 1),
               child: Image.asset(AppImage.finsteinLogo),
             ),
             Expanded(
               child: SlideInUp(
-                delay: const Duration(milliseconds: 500),
-                duration: const Duration(seconds: 1),
                 child: Container(
                   padding: const EdgeInsets.all(24),
-                  width: double.infinity,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -59,8 +54,6 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   child: SingleChildScrollView(
                     child: SlideInUp(
-                      delay: const Duration(milliseconds: 500),
-                      duration: const Duration(seconds: 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -147,14 +140,21 @@ class _SignInPageState extends State<SignInPage> {
     );
   }
 
-  void _redirectToWelcome() {
-    Navigator.push(
+  void _handleSubmit() {
+    if (_formKey.currentState!.validate()) {
+      _redirectToHomePage();
+    }
+  }
+
+  void _redirectToHomePage() {
+    Navigator.pushAndRemoveUntil(
       context,
       PageTransition(
-        child: const WelcomePage(),
+        child: HomePage(),
         type: PageTransitionType.rightToLeftWithFade,
         duration: const Duration(seconds: 1),
       ),
+      (route) => false,
     );
   }
 
@@ -164,14 +164,8 @@ class _SignInPageState extends State<SignInPage> {
       PageTransition(
         child: const SignUpPage(),
         type: PageTransitionType.rightToLeftWithFade,
-        duration: const Duration(seconds: 1),
+        duration: const Duration(milliseconds: 800),
       ),
     );
-  }
-
-  void _handleSubmit() {
-    if (_formKey.currentState!.validate()) {
-      _redirectToWelcome();
-    }
   }
 }

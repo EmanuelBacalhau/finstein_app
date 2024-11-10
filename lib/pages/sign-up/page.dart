@@ -44,14 +44,10 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           children: [
             SlideInUp(
-              delay: const Duration(milliseconds: 500),
-              duration: const Duration(seconds: 1),
               child: Image.asset(AppImage.finsteinLogo),
             ),
             Expanded(
               child: SlideInUp(
-                delay: const Duration(milliseconds: 500),
-                duration: const Duration(seconds: 1),
                 child: Container(
                   padding: const EdgeInsets.all(24),
                   width: double.infinity,
@@ -64,8 +60,6 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   child: SingleChildScrollView(
                     child: SlideInUp(
-                      delay: const Duration(milliseconds: 500),
-                      duration: const Duration(seconds: 2),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -199,6 +193,7 @@ class _SignUpPageState extends State<SignUpPage> {
       PageTransition(
         child: const SignInPage(),
         type: PageTransitionType.rightToLeft,
+        duration: const Duration(milliseconds: 800),
       ),
     );
   }

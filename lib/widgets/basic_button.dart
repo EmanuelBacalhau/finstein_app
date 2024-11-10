@@ -20,7 +20,7 @@ class BasicButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: isDisabled ? null : onPressed,
       style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 42),
+        minimumSize: const Size(double.maxFinite, 42),
         backgroundColor: isOutline ? Colors.white : AppColor.lightBlue,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
