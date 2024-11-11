@@ -1,12 +1,13 @@
 import 'package:finstein_app/constants/app_color.dart';
+import 'package:finstein_app/pages/create_expense/page.dart';
 import 'package:finstein_app/pages/home/widgets/button_tab_bar.dart';
 import 'package:finstein_app/pages/home/widgets/expense_item.dart';
-import 'package:finstein_app/pages/home/widgets/expenses_title.dart';
 import 'package:finstein_app/pages/home/widgets/progress_expenses.dart';
 import 'package:finstein_app/repositories/expenses_repository.dart';
 import 'package:finstein_app/repositories/month_repository.dart';
 import 'package:finstein_app/widgets/layout_page.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -41,6 +42,38 @@ class _HomePageState extends State<HomePage> {
           expensesRepository.getTotalExpensesPaidByMonth(monthId);
       totalExpenses = expensesRepository.getAllByMonth(monthId).length;
     });
+  }
+
+  void _createExpense({
+    required String title,
+    required String description,
+    required int monthId,
+    required double value,
+  }) {
+    setState(() {
+      expensesRepository.add(
+        title: title,
+        description: description,
+        value: value,
+        monthId: monthId,
+      );
+
+      total = expensesRepository
+          .getAllByMonth(_monthSelected)
+          .fold(0, (prev, element) => prev + element.getValue);
+    });
+  }
+
+  void _redirectCreateExpensePage() {
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: CreateExpense(
+          onCreateExpense: _createExpense,
+        ),
+      ),
+    );
   }
 
   @override
@@ -119,18 +152,52 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 8),
-          const ExpensesTitle(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Expenses',
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextButton(
+                onPressed: _redirectCreateExpensePage,
+                style: TextButton.styleFrom(
+                  backgroundColor: AppColor.darkBlue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                child: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+              ),
+            ],
+          ),
           Flexible(
             fit: FlexFit.tight,
-            child: ListView(
-              shrinkWrap: true,
-              children: expensesRepository
-                  .getAllByMonth(_monthSelected)
-                  .map(
-                    (expense) => ExpenseItem(item: expense),
+            child: expensesRepository.getAllByMonth(_monthSelected).isEmpty
+                ? const Text(
+                    'No expenses found',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFFBDBDBD),
+                    ),
                   )
-                  .toList(),
-            ),
+                : ListView(
+                    shrinkWrap: true,
+                    children: expensesRepository
+                        .getAllByMonth(_monthSelected)
+                        .map(
+                          (expense) => ExpenseItem(item: expense),
+                        )
+                        .toList(),
+                  ),
           )
         ],
       ),

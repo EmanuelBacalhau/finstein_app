@@ -197,7 +197,7 @@ class _SignUpPageState extends State<SignUpPage> {
       context,
       PageTransition(
         child: const SignInPage(),
-        type: PageTransitionType.leftToRightWithFade,
+        type: PageTransitionType.leftToRight,
         duration: const Duration(milliseconds: 800),
       ),
     );

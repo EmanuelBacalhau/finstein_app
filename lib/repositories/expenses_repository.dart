@@ -5,19 +5,7 @@ import 'package:finstein_app/models/expense.dart';
 class ExpensesRepository {
   final List<Expense> expenses = [];
 
-  ExpensesRepository() {
-    for (int monthId = 1; monthId <= 12; monthId++) {
-      for (int i = 0; i < 10; i++) {
-        add(
-          title: 'title',
-          description: 'description',
-          monthId: monthId,
-          value: Random().nextDouble() * 1000,
-        );
-      }
-    }
-    update(1, isPaid: true);
-  }
+  ExpensesRepository() {}
 
   List<Expense> getAll() {
     return expenses;
