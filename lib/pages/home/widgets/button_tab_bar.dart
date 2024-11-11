@@ -17,11 +17,13 @@ class ButtonTabBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       style: TextButton.styleFrom(
-        backgroundColor: isSelected ? AppColor.lightBlue : Colors.white,
+        backgroundColor: isSelected ? AppColor.darkBlue : Colors.white,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
           side: isSelected
-              ? BorderSide.none
+              ? const BorderSide(
+                  color: AppColor.darkBlue,
+                )
               : const BorderSide(
                   color: AppColor.lightBlue,
                 ),

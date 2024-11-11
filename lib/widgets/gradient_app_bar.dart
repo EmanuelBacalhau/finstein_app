@@ -16,6 +16,8 @@ class GradientAppBar extends StatelessWidget {
             AppColor.mediumBlue,
             AppColor.darkBlue,
           ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
         ),
       ),
       child: SafeArea(

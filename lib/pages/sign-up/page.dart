@@ -44,7 +44,11 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           children: [
             SlideInUp(
-              child: Image.asset(AppImage.finsteinLogo),
+              child: Image.asset(
+                AppImage.finsteinLogo,
+                width: 120,
+                height: 120,
+              ),
             ),
             Expanded(
               child: SlideInUp(
@@ -157,7 +161,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 const Text(
                                   "Sign In",
                                   style: TextStyle(
-                                    color: AppColor.lightBlue,
+                                    color: AppColor.darkBlue,
                                   ),
                                 )
                               ],
@@ -178,11 +182,12 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _handleSubmit() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacement(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
           builder: (_) => const WelcomePage(),
         ),
+        (route) => false,
       );
     }
   }
@@ -192,7 +197,7 @@ class _SignUpPageState extends State<SignUpPage> {
       context,
       PageTransition(
         child: const SignInPage(),
-        type: PageTransitionType.rightToLeft,
+        type: PageTransitionType.leftToRightWithFade,
         duration: const Duration(milliseconds: 800),
       ),
     );

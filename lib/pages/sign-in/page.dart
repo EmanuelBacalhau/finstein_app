@@ -39,7 +39,11 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           children: [
             SlideInUp(
-              child: Image.asset(AppImage.finsteinLogo),
+              child: Image.asset(
+                AppImage.finsteinLogo,
+                width: 120,
+                height: 120,
+              ),
             ),
             Expanded(
               child: SlideInUp(
@@ -121,7 +125,7 @@ class _SignInPageState extends State<SignInPage> {
                                 const Text(
                                   "Sign Up",
                                   style: TextStyle(
-                                    color: AppColor.lightBlue,
+                                    color: AppColor.darkBlue,
                                   ),
                                 )
                               ],

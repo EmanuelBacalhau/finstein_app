@@ -21,18 +21,18 @@ class BasicButton extends StatelessWidget {
       onPressed: isDisabled ? null : onPressed,
       style: ElevatedButton.styleFrom(
         minimumSize: const Size(double.maxFinite, 42),
-        backgroundColor: isOutline ? Colors.white : AppColor.lightBlue,
+        backgroundColor: isOutline ? Colors.white : AppColor.darkBlue,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(4),
           side: isOutline
-              ? const BorderSide(color: AppColor.lightBlue)
+              ? const BorderSide(color: AppColor.darkBlue)
               : BorderSide.none,
         ),
       ),
       child: Text(
         title,
         style: TextStyle(
-          color: isOutline ? AppColor.lightBlue : Colors.white,
+          color: isOutline ? AppColor.darkBlue : Colors.white,
         ),
       ),
     );

@@ -33,8 +33,9 @@ class _SplashPageState extends State<SplashPage>
         context,
         PageTransition(
           child: const WelcomePage(),
-          type: PageTransitionType.bottomToTop,
-          duration: const Duration(seconds: 1),
+          type: PageTransitionType.scale,
+          alignment: Alignment.center,
+          duration: const Duration(milliseconds: 300),
         ),
         (route) => false,
       ),
@@ -60,7 +61,7 @@ class _SplashPageState extends State<SplashPage>
         duration: const Duration(seconds: 5),
         child: Spin(
           child: Bounce(
-            delay: Duration(seconds: 2),
+            delay: const Duration(seconds: 2),
             child: Image.asset(
               AppImage.finsteinLogo,
               width: 120,

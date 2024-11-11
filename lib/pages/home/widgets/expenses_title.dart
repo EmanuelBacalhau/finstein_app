@@ -1,3 +1,4 @@
+import 'package:finstein_app/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ExpensesTitle extends StatelessWidget {
@@ -18,7 +19,7 @@ class ExpensesTitle extends StatelessWidget {
         TextButton(
           onPressed: () {},
           style: TextButton.styleFrom(
-            backgroundColor: Colors.green.shade600,
+            backgroundColor: AppColor.darkBlue,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),

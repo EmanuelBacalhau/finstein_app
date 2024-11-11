@@ -40,17 +40,17 @@ class _WelcomePageState extends State<WelcomePage> {
             Expanded(
               flex: 2,
               child: SlideInUp(
-                delay: const Duration(milliseconds: 500),
                 duration: const Duration(seconds: 1),
                 child: Image.asset(
                   AppImage.finsteinLogo,
+                  width: 120,
+                  height: 120,
                 ),
               ),
             ),
             Expanded(
               flex: 1,
               child: SlideInUp(
-                delay: const Duration(milliseconds: 500),
                 duration: const Duration(seconds: 1),
                 child: Container(
                   padding: const EdgeInsets.all(24.0),
