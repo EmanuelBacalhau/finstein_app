@@ -15,25 +15,32 @@ class ButtonTabBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: isSelected ? AppColor.darkBlue : Colors.white,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
-          side: isSelected
-              ? const BorderSide(
-                  color: AppColor.darkBlue,
-                )
-              : const BorderSide(
-                  color: AppColor.lightBlue,
-                ),
+    return Container(
+      width: 50,
+      height: 34,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: isSelected
+                ? Colors.white
+                : Colors.grey.shade100.withOpacity(0.5),
+          ),
         ),
       ),
-      onPressed: onPressed,
-      child: Text(
-        title.substring(0, 3),
-        style: TextStyle(
-          color: isSelected ? Colors.white : AppColor.lightBlue,
+      child: TextButton(
+        onPressed: onPressed,
+        style: TextButton.styleFrom(
+            overlayColor: Colors.transparent,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            )),
+        child: Text(
+          title.substring(0, 3),
+          style: TextStyle(
+            color: isSelected
+                ? Colors.white
+                : Colors.grey.shade100.withOpacity(0.5),
+          ),
         ),
       ),
     );

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:finstein_app/models/expense.dart';
 
 class ExpensesRepository {

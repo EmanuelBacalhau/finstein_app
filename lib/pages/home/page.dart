@@ -93,32 +93,14 @@ class _HomePageState extends State<HomePage> {
       widget: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            height: 50,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: monthRepository
-                  .getAll()
-                  .map(
-                    (month) => Row(
-                      children: [
-                        ButtonTabBar(
-                          onPressed: () => _onMonthSelected(month.id),
-                          title: month.name,
-                          isSelected: month.id == _monthSelected,
-                        ),
-                        const SizedBox(width: 8),
-                      ],
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-          const SizedBox(height: 8),
           Container(
             height: 200,
-            padding: const EdgeInsets.all(40),
             width: double.infinity,
+            padding: const EdgeInsets.only(
+              left: 16,
+              right: 16,
+              top: 4,
+            ),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [
@@ -133,8 +115,29 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(4),
             ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 50,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: monthRepository
+                        .getAll()
+                        .map(
+                          (month) => Row(
+                            children: [
+                              ButtonTabBar(
+                                onPressed: () => _onMonthSelected(month.id),
+                                title: month.name,
+                                isSelected: month.id == _monthSelected,
+                              ),
+                              const SizedBox(width: 8),
+                            ],
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
+                const SizedBox(height: 16),
                 Text(
                   '\$ ${total.toStringAsFixed(2)}',
                   style: const TextStyle(
