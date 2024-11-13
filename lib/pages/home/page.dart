@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
 
   int totalExpensesPaid = 0;
   int totalExpenses = 0;
+  int totalExpensesNotPaid = 0;
 
   void _onMonthSelected(int monthId) {
     setState(() {
@@ -41,6 +42,8 @@ class _HomePageState extends State<HomePage> {
       totalExpensesPaid =
           expensesRepository.getTotalExpensesPaidByMonth(monthId);
       totalExpenses = expensesRepository.getAllByMonth(monthId).length;
+      totalExpensesNotPaid =
+          expensesRepository.getTotalExpensesNotPaidByMonth(monthId);
     });
   }
 
@@ -61,6 +64,11 @@ class _HomePageState extends State<HomePage> {
       total = expensesRepository
           .getAllByMonth(_monthSelected)
           .fold(0, (prev, element) => prev + element.getValue);
+      totalExpensesPaid =
+          expensesRepository.getTotalExpensesPaidByMonth(_monthSelected);
+      totalExpenses = expensesRepository.getAllByMonth(_monthSelected).length;
+      totalExpensesNotPaid =
+          expensesRepository.getTotalExpensesNotPaidByMonth(_monthSelected);
     });
   }
 
@@ -76,6 +84,32 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _paidExpense(int id) {
+    setState(() {
+      expensesRepository.update(id, isPaid: true);
+      total = expensesRepository
+          .getAllByMonth(_monthSelected)
+          .fold(0, (prev, element) => prev + element.getValue);
+      totalExpensesPaid =
+          expensesRepository.getTotalExpensesPaidByMonth(_monthSelected);
+      totalExpensesNotPaid =
+          expensesRepository.getTotalExpensesNotPaidByMonth(_monthSelected);
+    });
+  }
+
+  void _deleteExpense(int id) {
+    setState(() {
+      expensesRepository.remove(id);
+      total = expensesRepository
+          .getAllByMonth(_monthSelected)
+          .fold(0, (prev, element) => prev + element.getValue);
+      totalExpensesPaid =
+          expensesRepository.getTotalExpensesPaidByMonth(_monthSelected);
+      totalExpensesNotPaid =
+          expensesRepository.getTotalExpensesNotPaidByMonth(_monthSelected);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -85,6 +119,8 @@ class _HomePageState extends State<HomePage> {
     totalExpensesPaid =
         expensesRepository.getTotalExpensesPaidByMonth(_monthSelected);
     totalExpenses = expensesRepository.getAllByMonth(_monthSelected).length;
+    totalExpensesNotPaid =
+        expensesRepository.getTotalExpensesNotPaidByMonth(_monthSelected);
   }
 
   @override
@@ -150,6 +186,7 @@ class _HomePageState extends State<HomePage> {
                 ProgressExpenses(
                   totalPaid: totalExpensesPaid,
                   totalExpenses: totalExpenses,
+                  totalNoPaid: totalExpensesNotPaid,
                 ),
               ],
             ),
@@ -197,7 +234,11 @@ class _HomePageState extends State<HomePage> {
                     children: expensesRepository
                         .getAllByMonth(_monthSelected)
                         .map(
-                          (expense) => ExpenseItem(item: expense),
+                          (expense) => ExpenseItem(
+                            item: expense,
+                            onPaid: _paidExpense,
+                            onDelete: _deleteExpense,
+                          ),
                         )
                         .toList(),
                   ),

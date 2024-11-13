@@ -1,4 +1,3 @@
-import 'package:finstein_app/constants/app_color.dart';
 import 'package:flutter/material.dart';
 
 class ButtonTabBar extends StatelessWidget {

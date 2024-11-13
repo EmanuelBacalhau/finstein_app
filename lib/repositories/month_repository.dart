@@ -58,6 +58,10 @@ class MonthRepository {
     ));
   }
 
+  Month getById(int id) {
+    return months.firstWhere((element) => element.id == id);
+  }
+
   List<Month> getAll() {
     return months;
   }

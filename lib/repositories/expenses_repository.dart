@@ -23,6 +23,12 @@ class ExpensesRepository {
         .length;
   }
 
+  int getTotalExpensesNotPaidByMonth(int monthId) {
+    return expenses
+        .where((element) => !element.getIsPaid && monthId == element.getMonthId)
+        .length;
+  }
+
   void add({
     required String title,
     required String description,
